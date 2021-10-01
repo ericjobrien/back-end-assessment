@@ -7,6 +7,7 @@
     <button id="complimentButton">Get a compliment</button>
     <button id="fortune">Get fortune</button>
     <button id="saying">Random Nonsense</button>
+    <button id='halloween'>Don't Click This Button</button>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script>
       document.getElementById("complimentButton").onclick = function () {
@@ -30,8 +31,8 @@
             .then(function (res) {
               const data = res.data;
               //alert(data); use to check if data is being accessed
-              let newEl = document.createElement('h2')
-              let bodyEl = document.querySelector('body')
+              let newEl = document.createElement('h2');
+              let bodyEl = document.querySelector('body');
               let img = document.createElement('img');
               
               
@@ -48,8 +49,29 @@
               bodyEl.appendChild(newEl);
               bodyEl.appendChild(img);
               
-            })
-      }
+            });
+      };
+
+      document.getElementById('halloween').onclick = function () {
+        axios.get('http://localhost:4000/api/halloween/')
+            .then(function (res) {
+              const data = res.data;
+              // alert(data);
+              let newEl = document.createElement('h1');
+              let newVid = document.createElement('audio');
+              let bodyEl = document.querySelector('body');
+
+              newVid.src = "https://www.shockwave-sound.com/sound-effects/scream-sounds/cri-d-effroi-scream.wav";
+              newVid.autoplay = true;
+              newVid.width = 320;
+              newEl.textContent = data;
+              bodyEl.appendChild(newVid);
+              bodyEl.appendChild(newEl);
+              newEl.style.color = 'orange';
+              bodyEl.style.backgroundColor = 'black';
+
+            });
+      };
     </script>
   </body>
 </html>

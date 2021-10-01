@@ -53,8 +53,9 @@ res.status(200).send(randomSaying);
 
 });
 
-app.post('/api/halloween', (req, res) => {
-  
-})
+app.get('/api/halloween', (req, res) => {
+  const halloween = 'HAPPY HALLOWEEN'
+  res.status(200).send(halloween);
+});
 
 app.listen(4000, () => console.log("Server running on 4000"));
