@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Back End Assessment</title>
+  </head>
+  <body class="container">
+    <button id="complimentButton">Get a compliment</button>
+    <button id="fortune">Get fortune</button>
+    <button id="saying">Random Nonsense</button>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+      document.getElementById("complimentButton").onclick = function () {
+        axios.get("http://localhost:4000/api/compliment/")
+            .then(function (response) {
+              const data = response.data;
+              alert(data);
+            });
+      };
+
+      document.getElementById("fortune").onclick = function () {
+        axios.get('http://localhost:4000/api/fortune/')
+            .then(function (res) {
+              const data = res.data;
+              alert(data);
+            });
+      };
+
+      document.getElementById('saying').onclick = function () {
+        axios.get('http://localhost:4000/api/saying/')
+            .then(function (res) {
+              const data = res.data;
+              //alert(data); use to check if data is being accessed
+              let newEl = document.createElement('h2')
+              let bodyEl = document.querySelector('body')
+              let img = document.createElement('img');
+              
+              
+              const imgArr = ['https://ogden_images.s3.amazonaws.com/www.observertoday.com/images/2021/02/26230850/Fozzie-Bear.jpg',
+            'https://ewscripps.brightspotcdn.com/dims4/default/72fc6b7/2147483647/strip/true/crop/1629x916+0+35/resize/1280x720!/quality/90/?url=http%3A%2F%2Fewscripps-brightspot.s3.amazonaws.com%2F47%2Fd6%2Faf191eba426fbe25cb4bdc49a910%2F50965738773-9b0be237dd-k.jpg',
+          'https://pbs.twimg.com/profile_images/839905525290590209/KuoxQYbn.jpg', 'https://pyxis.nymag.com/v1/imgs/14c/1fe/32ceb83df37ae83161116c7efc42070295-06-muppets.rsquare.w700.jpg',
+        'https://api.time.com/wp-content/uploads/2020/07/muppets-now-disney-plus.jpg'];
+              let randomImageIndex = Math.floor(Math.random() * imgArr.length);
+              let randomImage = imgArr[randomImageIndex];
+              img.src = randomImage;
+              img.width = 175;
+              newEl.textContent = data;
+              newEl.style.color = 'skyblue';
+              bodyEl.appendChild(newEl);
+              bodyEl.appendChild(img);
+              
+            })
+      }
+    </script>
+  </body>
+</html>
